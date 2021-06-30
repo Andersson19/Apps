@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/keepDie2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="74dp"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/keepDie1"
+        app:layout_constraintTop_toBottomOf="@+id/dice5"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/keepDie3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="74dp"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/keepDie2"
+        app:layout_constraintTop_toBottomOf="@+id/dice6"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/keepDie4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keepDie1"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/keepDie5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/keepDie4"
+        app:layout_constraintTop_toBottomOf="@+id/keepDie2"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/keepDie6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/keepDie5"
+        app:layout_constraintTop_toBottomOf="@+id/keepDie3"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/dice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice6"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/dice1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white1" />
+
+    <ImageButton
+        android:id="@+id/dice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice1"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white3" />
+
+    <ImageButton
+        android:id="@+id/dice4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice5"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dice1"
+        app:srcCompat="@drawable/white5" />
+
+    <ImageButton
+        android:id="@+id/dice5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice5"
+        app:layout_constraintStart_toEndOf="@+id/dice4"
+        app:layout_constraintTop_toBottomOf="@+id/dice2"
+        app:srcCompat="@drawable/white2" />
+
+    <ImageButton
+        android:id="@+id/dice6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice6"
+        app:layout_constraintStart_toEndOf="@+id/dice5"
+        app:layout_constraintTop_toBottomOf="@+id/dice3"
+        app:srcCompat="@drawable/white5" />
+
+    <ImageButton
+        android:id="@+id/dice3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/dice3"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/dice2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white6" />
+
+    <Button
+        android:id="@+id/calc_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/calc_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/choice"
+        android:layout_width="242dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pointView"
+        android:layout_width="152dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="304dp"
+        android:text="@string/points"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dice4" />
+
+    <TextView
+        android:id="@+id/pointView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="304dp"
+        android:text="@string/pointView"
+        android:textSize="48sp"
+        app:layout_constraintStart_toEndOf="@+id/pointView"
+        app:layout_constraintTop_toBottomOf="@+id/dice5" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/throwText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="47dp"
+        android:text="@string/keepText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dice4" />
+
+    <ImageButton
+        android:id="@+id/keepDie1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:contentDescription="@string/dice1"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/white1" />
+
+    <Button
+        android:id="@+id/throwButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/throwText"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="255dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
