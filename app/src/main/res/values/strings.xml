@@ -8,6 +8,7 @@
     <string name="dice5">dice5</string>
     <string name="dice6">dice6</string>
 
+    <string name="welcomeText">Welcome to Thirty!</string>
     <string name="calc_button">Calculate</string>
     <string name="start_button">Start</string>
     <string name="points">Points: </string>

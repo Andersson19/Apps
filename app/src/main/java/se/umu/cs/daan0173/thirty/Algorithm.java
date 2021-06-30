@@ -3,18 +3,35 @@ package se.umu.cs.daan0173.thirty;
 import java.util.*;
 import java.util.Arrays;
 
+//Algorithm used for calculating result of thrown dice and choice made
+//
+//Will find all possible combinations that will match the choice the user has made.
+//Then it checks, for each combination, (starting at a 1 combination (exact match), then checking for a 2 combination and so forth..)
+//if they are "legitimate" meaning, if they exist as a subarray in the array containing the result for dice thrown
+//
+//When a match has been found, all Integers from that combination will be set as '0' in the original array to prevent
+//multiple combinations using the same Integers.
+//
+//To clarify the statement above, if a combination was found for let's say (2,1) for target 3 and result for dice thrown was [2,1,4,5,1,1].
+//Since we do not find any exact matches for 3, we move onto 2 combinations and find (2,1) as a match for 3.
+//This means when we get to the 3 combinations, (1,1,1) will not be counted since one of the 1's has been used in the 2 combinations already counted.
 public class Algorithm {
 
+    //Keep track of exact matches for given target
     private static int[] res_of_1 = new int[6];
+
+    //Keep track of combinations of multiple die that match given target
     private static ArrayList<Tuple2<Integer,Integer>> res_of_2 = new ArrayList<Tuple2<Integer,Integer>>();
     private static ArrayList<Tuple3<Integer,Integer,Integer>> res_of_3 = new ArrayList<Tuple3<Integer,Integer,Integer>>();
     private static ArrayList<Tuple4<Integer,Integer,Integer,Integer>> res_of_4 = new ArrayList<Tuple4<Integer,Integer,Integer,Integer>>();
     private static ArrayList<Tuple5<Integer,Integer,Integer,Integer,Integer>> res_of_5 = new ArrayList<Tuple5<Integer,Integer,Integer,Integer,Integer>>();
     private static ArrayList<Tuple6<Integer,Integer,Integer,Integer,Integer,Integer>> res_of_6 = new ArrayList<Tuple6<Integer,Integer,Integer,Integer,Integer,Integer>>();
 
-
+    //Array keeping track of result of the thrown dice
     private int[] arr;
+    //The target we want to match
     private int target;
+    //Points generated
     private int points;
 
     public int getResult() {
@@ -43,57 +60,11 @@ public class Algorithm {
         //search six's and add to res_of_6 arr
         search_6(arr, target);
 
-        System.out.println("res_of_1: " + Arrays.toString(res_of_1));
-
-        System.out.print("res_of_2: [ ");
-        for (int i = 0; i < res_of_2.size(); i++) {
-            System.out.print("(" + res_of_2.get(i).a + ", " + res_of_2.get(i).b + "), ");
-        }
-        System.out.print(" ]");
-        System.out.println("");
-
-        System.out.print("res_of_3: [ ");
-        for (int i = 0; i < res_of_3.size(); i++) {
-            System.out.print("(" + res_of_3.get(i).a + ", " + res_of_3.get(i).b + ", " + res_of_3.get(i).c + "), ");
-        }
-        System.out.print(" ]");
-        System.out.println("");
-
-        System.out.print("res_of_4: [ ");
-        for (int i = 0; i < res_of_4.size(); i++) {
-            System.out.print("(" + res_of_4.get(i).a + ", " + res_of_4.get(i).b + ", " + res_of_4.get(i).c + ", " + res_of_4.get(i).d + "), ");
-        }
-        System.out.print(" ]");
-        System.out.println("");
-
-        System.out.print("res_of_5: [ ");
-        for (int i = 0; i < res_of_5.size(); i++) {
-            System.out.print("(" + res_of_5.get(i).a + ", " + res_of_5.get(i).b + ", " + res_of_5.get(i).c + ", " + res_of_5.get(i).d + ", " + res_of_5.get(i).e + "), ");
-        }
-        System.out.print(" ]");
-        System.out.println("");
-
-        System.out.print("res_of_6: [ ");
-        for (int i = 0; i < res_of_6.size(); i++) {
-            System.out.print("(" + res_of_6.get(i).a + ", " + res_of_6.get(i).b + ", " + res_of_6.get(i).c + ", " + res_of_6.get(i).d + ", " + res_of_6.get(i).e + ", " + res_of_6.get(i).f + "), ");
-        }
-        System.out.print(" ]");
-        System.out.println("");
-
+        //calculate result
         calc_result();
     }
 
-    public static void search_exact(int[] arr, int target) {
-        int index = 0;
-        for (int a : arr) {
-            if (a == target) {
-                System.out.println("found lonesome");
-                res_of_1[index] = a;
-                index += 1;
-            }
-        }
-    }
-
+    //Tuples used for keeping track of combinations that match target
     private static class Tuple2<A, B> {
         public A a;
         public B b;
@@ -129,6 +100,18 @@ public class Algorithm {
         public F f;
     }
 
+    //Find exact match for target
+    public static void search_exact(int[] arr, int target) {
+        int index = 0;
+        for (int a : arr) {
+            if (a == target) {
+                res_of_1[index] = a;
+                index += 1;
+            }
+        }
+    }
+
+    //Find all combination of two dice matching target
     public static void search_2(int[] arr, int target) {
 
         for (int i = 0; i < arr.length - 1; i++) {
@@ -140,7 +123,6 @@ public class Algorithm {
                 int y = arr[next];
 
                 if (x + y == target) {
-                    System.out.println("" + x + " + " + y + " = " + target);
                     Tuple2<Integer,Integer> tpl = new Tuple2<Integer,Integer>();
                     tpl.a = x;
                     tpl.b = y;
@@ -157,6 +139,7 @@ public class Algorithm {
         }
     }
 
+    //Find all combination of three dice matching target
     public static void search_3(int[] arr, int target) {
 
         for (int i = 0; i < arr.length - 2; i++) {
@@ -169,7 +152,6 @@ public class Algorithm {
                     int z = arr[k];
 
                     if (x + y + z == target) {
-                        System.out.println("" + x + " + " + y + " + " + z + " = " + target);
                         Tuple3<Integer,Integer,Integer> tpl = new Tuple3<>();
                         tpl.a = x;
                         tpl.b = y;
@@ -182,6 +164,7 @@ public class Algorithm {
         }
     }
 
+    //Find all combination of four dice matching target
     public static void search_4(int[] arr, int target) {
 
         for (int i = 0; i < arr.length - 3; i++) {
@@ -196,7 +179,6 @@ public class Algorithm {
                     for (int l = i+3; l < arr.length; l++) {
                         int m = arr[l];
                         if (x + y + z + m == target) {
-                            System.out.println("" + x + " + " + y + " + " + z + " + " + m + " = " + target);
                             Tuple4<Integer,Integer,Integer,Integer> tpl = new Tuple4<>();
                             tpl.a = x;
                             tpl.b = y;
@@ -213,6 +195,7 @@ public class Algorithm {
         }
     }
 
+    //Find all combination of five dice matching target
     public static void search_5(int[] arr, int target) {
 
         for (int i = 0; i < arr.length - 4; i++) {
@@ -231,7 +214,6 @@ public class Algorithm {
                             int f = arr[n];
 
                             if (x + y + z + m + f == target) {
-                                System.out.println("" + x + " + " + y + " + " + z + " + " + m + " + " + f + " = " + target);
                                 Tuple5<Integer,Integer,Integer,Integer,Integer> tpl = new Tuple5<>();
                                 tpl.a = x;
                                 tpl.b = y;
@@ -252,6 +234,7 @@ public class Algorithm {
         }
     }
 
+    //Find all combination of six dice matching target
     public static void search_6(int[] arr, int target) {
 
         for (int i = 0; i < arr.length - 4; i++) {
@@ -273,7 +256,6 @@ public class Algorithm {
                                 int u = arr[a];
 
                                 if (x + y + z + m + f + u == target) {
-                                    System.out.println("" + x + " + " + y + " + " + z + " + " + m + " + " + f + " + " + u + " = " + target);
                                     Tuple6<Integer,Integer,Integer,Integer,Integer,Integer> tpl = new Tuple6<>();
                                     tpl.a = x;
                                     tpl.b = y;
@@ -285,55 +267,41 @@ public class Algorithm {
                                     res_of_6.add(tpl);
                                 }
                             }
-
-
                         }
-
-
                     }
-
-
                 }
             }
         }
     }
 
+    //Check for each combination, if they exist as subarray in array of results
     static boolean all_items_in_array(int[] arr, int[] temp) {
 
         int[] copy = arr.clone();
 
-        //System.out.println("Checking array: " + Arrays.toString(temp));
-
         for (int n = 0; n < temp.length; n++) {
 
-            //System.out.println("Checking: " + n);
             boolean found = false;
 
             for (int i = 0; i < copy.length; i++) {
                 if (temp[n] == copy[i]) {
-                    //System.out.println("Found match for: " + temp[n] + " with tempindex: " + n);
                     found = true;
+                    //set to zero to prevent multiple combinations using the same die
                     copy[i] = 0;
                     break;
-                } else {
-                    //System.out.println("" + temp[n] + " is not equal to: " + copy[i]);
                 }
             }
 
             if (!found) {
-
                 return false;
             }
-
         }
-
         return true;
     }
 
+    //Calculate the result
     public void calc_result() {
         int result = 0;
-
-        System.out.println("Calculating results for arr: " + Arrays.toString(arr) + " with target: " + target);
 
         //check 1's
         for (int i = 0; i < arr.length; i++) {
@@ -342,14 +310,10 @@ public class Algorithm {
 
                 //remove this element from the array
                 arr[i] = 0;
-                System.out.println("Removed lonesome: " + arr[i] + "and added points");
             }
         }
 
-        System.out.println("Array is now : " + Arrays.toString(arr));
-
         //check 2's
-
         for (Tuple2<Integer,Integer> tpl : res_of_2) {
             int[] temp = new int[2];
             temp[0] = tpl.a;
@@ -357,16 +321,15 @@ public class Algorithm {
             if (all_items_in_array(arr, temp)) {
                 result += target;
 
+                //make sure we only remove 1 of the matching Integers
                 boolean a_removed = false;
                 boolean b_removed = false;
                 for (int i = 0; i < arr.length; i++) {
 
                     if (arr[i] == temp[0] && !a_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[0]);
                         arr[i] = 0;
                         a_removed = true;
                     } else if (arr[i] == temp[1] && !b_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[1]);
                         arr[i] = 0;
                         b_removed = true;
                     }
@@ -374,10 +337,7 @@ public class Algorithm {
             }
         }
 
-        System.out.println("Array is now : " + Arrays.toString(arr));
-
         //check 3's
-
         for (Tuple3<Integer,Integer,Integer> tpl : res_of_3) {
             int[] temp = new int[3];
             temp[0] = tpl.a;
@@ -386,21 +346,19 @@ public class Algorithm {
             if (all_items_in_array(arr, temp)) {
                 result += target;
 
+                //make sure we only remove 1 of the matching Integers
                 boolean a_removed = false;
                 boolean b_removed = false;
                 boolean c_removed = false;
                 for (int i = 0; i < arr.length; i++) {
 
                     if (arr[i] == temp[0] && !a_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[0]);
                         arr[i] = 0;
                         a_removed = true;
                     } else if (arr[i] == temp[1] && !b_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[1]);
                         arr[i] = 0;
                         b_removed = true;
                     } else if (arr[i] == temp[2] && !c_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[2]);
                         arr[i] = 0;
                         c_removed = true;
                     }
@@ -408,10 +366,7 @@ public class Algorithm {
             }
         }
 
-        System.out.println("Array is now : " + Arrays.toString(arr));
-
         //check 4's
-
         for (Tuple4<Integer,Integer,Integer,Integer> tpl : res_of_4) {
             int[] temp = new int[4];
             temp[0] = tpl.a;
@@ -421,6 +376,7 @@ public class Algorithm {
             if (all_items_in_array(arr, temp)) {
                 result += target;
 
+                //make sure we only remove 1 of the matching Integers
                 boolean a_removed = false;
                 boolean b_removed = false;
                 boolean c_removed = false;
@@ -428,19 +384,15 @@ public class Algorithm {
                 for (int i = 0; i < arr.length; i++) {
 
                     if (arr[i] == temp[0] && !a_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[0]);
                         arr[i] = 0;
                         a_removed = true;
                     } else if (arr[i] == temp[1] && !b_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[1]);
                         arr[i] = 0;
                         b_removed = true;
                     } else if (arr[i] == temp[2] && !c_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[2]);
                         arr[i] = 0;
                         c_removed = true;
                     } else if (arr[i] == temp[3] && !d_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[3]);
                         arr[i] = 0;
                         d_removed = true;
                     }
@@ -449,7 +401,6 @@ public class Algorithm {
         }
 
         //check 5's
-
         for (Tuple5<Integer,Integer,Integer,Integer,Integer> tpl : res_of_5) {
             int[] temp = new int[5];
             temp[0] = tpl.a;
@@ -460,6 +411,7 @@ public class Algorithm {
             if (all_items_in_array(arr, temp)) {
                 result += target;
 
+                //make sure we only remove 1 of the matching Integers
                 boolean a_removed = false;
                 boolean b_removed = false;
                 boolean c_removed = false;
@@ -468,23 +420,18 @@ public class Algorithm {
                 for (int i = 0; i < arr.length; i++) {
 
                     if (arr[i] == temp[0] && !a_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[0]);
                         arr[i] = 0;
                         a_removed = true;
                     } else if (arr[i] == temp[1] && !b_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[1]);
                         arr[i] = 0;
                         b_removed = true;
                     } else if (arr[i] == temp[2] && !c_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[2]);
                         arr[i] = 0;
                         c_removed = true;
                     } else if (arr[i] == temp[3] && !d_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[3]);
                         arr[i] = 0;
                         d_removed = true;
                     } else if (arr[i] == temp[4] && !e_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[4]);
                         arr[i] = 0;
                         e_removed = true;
                     }
@@ -493,7 +440,6 @@ public class Algorithm {
         }
 
         //check 6's
-
         for (Tuple6<Integer,Integer,Integer,Integer,Integer,Integer> tpl : res_of_6) {
             int[] temp = new int[6];
             temp[0] = tpl.a;
@@ -505,6 +451,7 @@ public class Algorithm {
             if (all_items_in_array(arr, temp)) {
                 result += target;
 
+                //make sure we only remove 1 of the matching Integers
                 boolean a_removed = false;
                 boolean b_removed = false;
                 boolean c_removed = false;
@@ -514,27 +461,21 @@ public class Algorithm {
                 for (int i = 0; i < arr.length; i++) {
 
                     if (arr[i] == temp[0] && !a_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[0]);
                         arr[i] = 0;
                         a_removed = true;
                     } else if (arr[i] == temp[1] && !b_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[1]);
                         arr[i] = 0;
                         b_removed = true;
                     } else if (arr[i] == temp[2] && !c_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[2]);
                         arr[i] = 0;
                         c_removed = true;
                     } else if (arr[i] == temp[3] && !d_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[3]);
                         arr[i] = 0;
                         d_removed = true;
                     } else if (arr[i] == temp[4] && !e_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[4]);
                         arr[i] = 0;
                         e_removed = true;
                     } else if (arr[i] == temp[5] && !f_removed) {
-                        System.out.println("Found match in: " + arr[i] + " and " + temp[5]);
                         arr[i] = 0;
                         f_removed = true;
                     }
@@ -542,8 +483,7 @@ public class Algorithm {
             }
         }
 
-        System.out.println("Points: " + result);
-
+        //reset all results (Didn't quite understand why this created issues but it did.)
         Arrays.fill(res_of_1,0);
         res_of_2.clear();
         res_of_3.clear();
@@ -554,8 +494,9 @@ public class Algorithm {
         this.points = result;
     }
 
+    //main method used for debugging
 
-
+    /*
     public static void main(String[] args) {
         int[] arr = {2,5,5,6,6,1};
         int TARGET = 5;
@@ -601,6 +542,5 @@ public class Algorithm {
         System.out.print(" ]");
         System.out.println("");
     }
-
-
+    */
 }

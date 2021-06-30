@@ -17,6 +17,7 @@ public class ResultScreen extends AppCompatActivity {
     private TextView totalPoints;
     private Button mPlayAgainButton;
 
+    //Display each rounds choice and points in table 
     private ArrayList<String> roundChoices;
     private ArrayList<Integer> roundPoints;
 
