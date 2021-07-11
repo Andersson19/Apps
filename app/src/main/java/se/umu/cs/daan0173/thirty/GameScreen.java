@@ -3,6 +3,7 @@ package se.umu.cs.daan0173.thirty;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,10 +12,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
+
+    /*  ----------------
+        ---Attributes---
+        ----------------  */
+
+    private static final String TAG = "GameScreen";
 
     private Button mCalc_button;
     private Button mThrow_button;
@@ -33,7 +41,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageButton[] keepDice;
 
     //List for keeping track for each die if they are kept or not
-    private ArrayList<Boolean> keepDie;
+    private boolean[] keepDie;
 
     //storing results of dices thrown
     private int[] faces;
@@ -46,7 +54,7 @@ public class GameScreen extends AppCompatActivity {
     private int roundCounter;
 
     //List for storing choices
-    private List<String> choicesList;
+    private ArrayList<String> choicesList;
 
     //Reference to the Spinner containing choices
     private Spinner dropdown;
@@ -57,23 +65,23 @@ public class GameScreen extends AppCompatActivity {
     protected ArrayList<String> roundChoices = new ArrayList<>();
     protected ArrayList<Integer> roundPoints = new ArrayList<Integer>();
 
+    /*  ---------------
+        --- Methods ---
+        ---------------   */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "In the onCreate() event");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        keepDie = new ArrayList<>();
+        getSupportActionBar().hide();
 
         //init to 0
         throwCounter = 0;
         roundCounter = 0;
 
+        keepDie = new boolean[6];
         faces = new int[6];
-
-        //No dice are kept at startup
-        for (int i = 0; i < 6; i++) {
-            keepDie.add(false);
-        }
 
         dice = new ImageButton[] { findViewById(R.id.dice1),
                 findViewById(R.id.dice2),
@@ -81,13 +89,6 @@ public class GameScreen extends AppCompatActivity {
                 findViewById(R.id.dice4),
                 findViewById(R.id.dice5),
                 findViewById(R.id.dice6)};
-
-        keepDice = new ImageButton[] { findViewById(R.id.keepDie1),
-                findViewById(R.id.keepDie2),
-                findViewById(R.id.keepDie3),
-                findViewById(R.id.keepDie4),
-                findViewById(R.id.keepDie5),
-                findViewById(R.id.keepDie6)};
 
         //set onClickListeners for each die in unkept area
         for (int i = 0; i < dice.length; i++) {
@@ -98,29 +99,16 @@ public class GameScreen extends AppCompatActivity {
                 public void onClick(View v) {
 
                     //Clicking unkept die hides that die and shows kept die instead
-                    dice[j].setVisibility(View.INVISIBLE);
-                    keepDice[j].setVisibility(View.VISIBLE);
+                    if (!keepDie[j]) {
+                        dice[j].setAlpha(0.5f);
+                        keepDie[j] = true;
+                    } else {
+                        dice[j].setAlpha(1.0f);
+                        keepDie[j] = false;
+                    }
 
                     //keep track of kept die
-                    keepDie.set(j, true);
-                }
-            });
-        }
 
-        //set onClickListeners for each die in kept area
-        for (int i = 0; i < dice.length; i++) {
-            ImageButton kd = keepDice[i];
-            final int j = i;
-            kd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    //Clicking kept die hides that die and shows unkept die instead
-                    dice[j].setVisibility(View.VISIBLE);
-                    keepDice[j].setVisibility(View.INVISIBLE);
-
-                    //keep track of unkept die
-                    keepDie.set(j, false);
                 }
             });
         }
@@ -132,7 +120,9 @@ public class GameScreen extends AppCompatActivity {
                 //Only three throws allowed per round
                 if (throwCounter < 3) {
                     throw_dice();
+                    Log.d(TAG, "throwing dice");
                 } else {
+                    Log.d(TAG, "Showing Toast");
                     Toast.makeText(getApplicationContext(), "Only 3 throws allowed!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -175,18 +165,21 @@ public class GameScreen extends AppCompatActivity {
 
         dropdown = findViewById(R.id.choice);
 
+        String[] choices = new String[] {
+                "Low",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+        };
+
         //List of all choices
-        choicesList = new ArrayList<>();
-        choicesList.add("Low");
-        choicesList.add("4");
-        choicesList.add("5");
-        choicesList.add("6");
-        choicesList.add("7");
-        choicesList.add("8");
-        choicesList.add("9");
-        choicesList.add("10");
-        choicesList.add("11");
-        choicesList.add("12");
+        choicesList = new ArrayList<>(Arrays.asList(choices));
 
         //Found solution of using ArrayAdapters to remove elements from Spinner, online at: https://android--code.blogspot.com/2015/08/android-spinner-remove-item.html
         dropdownArrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_item, choicesList);
@@ -195,17 +188,116 @@ public class GameScreen extends AppCompatActivity {
 
         mPointView = findViewById(R.id.pointView2);
 
-
         //throw dice first time
-        throw_dice();
+        if (savedInstanceState == null) {
+            throw_dice();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+        saveInstanceState.putIntArray("faces", faces);
+        saveInstanceState.putBooleanArray("keepDie", keepDie);
+        saveInstanceState.putInt("throwCounter", throwCounter);
+        saveInstanceState.putInt("roundCounter", roundCounter);
+        saveInstanceState.putStringArrayList("choicesList", choicesList);
+        Log.d(TAG, "In onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(TAG, "In onRestoreInstanceState");
+        super.onRestoreInstanceState(savedInstanceState);
+        keepDie = savedInstanceState.getBooleanArray("keepDie");
+        faces = savedInstanceState.getIntArray("faces");
+        throwCounter = savedInstanceState.getInt("throwCounter");
+        roundCounter = savedInstanceState.getInt("roundCounter");
+        choicesList = savedInstanceState.getStringArrayList("choicesList");
+
+        updateDice();
+
+    }
+
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "In the onStart() event");
+    }
+
+    public void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "In the onRestart() event");
+    }
+
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "In the onResume() event");
+    }
+
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "In the onPause() event");
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "In the onStop() event");
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "In the onDestroy() event");
     }
 
     //Reset all kept dice to unkept stage
     public void resetDice() {
-        for (int i = 0; i < keepDie.size(); i++) {
-            dice[i].setVisibility(View.VISIBLE);
-            keepDice[i].setVisibility(View.INVISIBLE);
-            keepDie.set(i, false);
+        for (int i = 0; i < keepDie.length; i++) {
+            dice[i].setAlpha(1.0f);
+            keepDie[i] = false;
+        }
+    }
+
+    //update view for dice
+    public void updateDice() {
+        for (int i = 0; i < faces.length; i++) {
+            switch(faces[i]) {
+                case 1:
+                    dice[i].setImageResource(R.drawable.white1);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+                case 2:
+                    dice[i].setImageResource(R.drawable.white2);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+                case 3:
+                    dice[i].setImageResource(R.drawable.white3);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+                case 4:
+                    dice[i].setImageResource(R.drawable.white4);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+                case 5:
+                    dice[i].setImageResource(R.drawable.white5);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+                case 6:
+                    dice[i].setImageResource(R.drawable.white6);
+                    if(keepDie[i]) {
+                        dice[i].setAlpha(0.5f);
+                    }
+                    break;
+            }
         }
     }
 
@@ -214,38 +306,10 @@ public class GameScreen extends AppCompatActivity {
         for (int i = 0; i < 6; i++) {
 
             //check for kept die or not
-            if (!keepDie.get(i)) {
+            if (!keepDie[i]) {
 
                 //get outcome of dice throw
                 int rand_int = rand.nextInt(6) + 1;
-
-                //change view for thrown dice based on outcome
-                switch (rand_int) {
-                    case 1:
-                        dice[i].setImageResource(R.drawable.white1);
-                        keepDice[i].setImageResource(R.drawable.white1);
-                        break;
-                    case 2:
-                        dice[i].setImageResource(R.drawable.white2);
-                        keepDice[i].setImageResource(R.drawable.white2);
-                        break;
-                    case 3:
-                        dice[i].setImageResource(R.drawable.white3);
-                        keepDice[i].setImageResource(R.drawable.white3);
-                        break;
-                    case 4:
-                        dice[i].setImageResource(R.drawable.white4);
-                        keepDice[i].setImageResource(R.drawable.white4);
-                        break;
-                    case 5:
-                        dice[i].setImageResource(R.drawable.white5);
-                        keepDice[i].setImageResource(R.drawable.white5);
-                        break;
-                    case 6:
-                        dice[i].setImageResource(R.drawable.white6);
-                        keepDice[i].setImageResource(R.drawable.white6);
-                        break;
-                }
 
                 //save outcome of dice throw
                 faces[i] = rand_int;
@@ -253,6 +317,9 @@ public class GameScreen extends AppCompatActivity {
             }
 
         }
+
+        //update view
+        updateDice();
 
         //increment throws
         throwCounter++;

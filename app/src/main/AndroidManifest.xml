@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Thirty">
-        <activity android:name=".GameScreen"></activity>
-        <activity android:name=".ResultScreen"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".GameScreen" android:launchMode="standard"></activity>
+        <activity android:name=".ResultScreen" android:launchMode="standard"></activity>
+        <activity android:name=".MainActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

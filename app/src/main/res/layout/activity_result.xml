@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="331dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="40dp"
-        android:text="@string/wellPlayed"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="333dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:stretchColumns="0,1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/wellPlayed"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow android:background="@android:color/holo_green_light">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:layout_marginBottom="15dp">
 
             <!-- Table Heading -->
 
@@ -40,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:gravity="center_horizontal"
-                android:padding="10sp"
+                android:padding="0sp"
                 android:text="@string/roundCol"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -68,386 +67,410 @@
                 android:textSize="14sp" />
         </TableRow>
 
-        <TableRow>
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/total_points"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:tabMode="scrollable">
 
-            <TextView
-                android:layout_width="0dp"
+
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round1"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:layout_weight="0">
 
-            <TextView
-                android:id="@+id/choice1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice1"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="@string/round1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round1points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="@string/choice1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round1points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round2"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice2"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round2"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round2points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice2"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round2points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round3"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice3"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round3"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round3points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice3"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round3points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round4"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice4"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round4"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round4points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice4"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round4points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round5"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice5"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round5"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round5points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice5"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round5points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round6"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice6"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round6"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round6points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice6"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round6points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round7"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice7"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round7"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round7points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice7"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round7points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round8"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice8"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round8"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round8points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice8"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round8points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow>
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round9"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow>
 
-            <TextView
-                android:id="@+id/choice9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice9"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round9"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round9points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice9"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/points9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round9points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        <TableRow android:layout_height="wrap_content">
+            </TableRow>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round10"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+            <TableRow android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/choice10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/choice10"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round10"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/points10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center_horizontal"
-                android:padding="10sp"
-                android:text="@string/round10points"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/choice10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/choice10"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:id="@+id/points10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_horizontal"
+                    android:padding="10sp"
+                    android:text="@string/round10points"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/playAgainBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/playAgain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+            </TableRow>
+        </TableLayout>
 
-    <TextView
-        android:id="@+id/total_points"
-        android:layout_width="238dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/totalPoints"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        <TextView
+            android:id="@+id/total_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="20dp"
+            android:text="@string/totalPoints"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/playAgainBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="10dp"
+            android:text="@string/playAgain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/total_points" />
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+

@@ -1,5 +1,6 @@
 package se.umu.cs.daan0173.thirty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 public class ResultScreen extends AppCompatActivity {
 
+    //Display total points
     private TextView totalPoints;
+    //Button for returning to main menu
     private Button mPlayAgainButton;
 
     //Display each rounds choice and points in table 
@@ -38,10 +41,12 @@ public class ResultScreen extends AppCompatActivity {
         mPlayAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(ResultScreen.this, MainActivity.class));
             }
         });
 
+        //Get the variables that were passed from GameScreen Activity
+        //The two variables are two ArrayLists that containing the choice and points generated that round
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             roundChoices = extras.getStringArrayList("roundChoices");

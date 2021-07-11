@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        getSupportActionBar().setTitle("Welcome to Thirty!");
 
         mStart_button = findViewById(R.id.start_button);
         mStart_button.setOnClickListener(new View.OnClickListener() {
@@ -25,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, GameScreen.class));
             }
         });
-
-
     }
 
 }
