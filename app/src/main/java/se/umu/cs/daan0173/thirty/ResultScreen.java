@@ -37,6 +37,16 @@ public class ResultScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        setupResultData();
+
+        fillResultTable();
+
+        setTotalPoints();
+
+        setupPlayAgainBtn();
+    }
+
+    public void setupPlayAgainBtn() {
         mPlayAgainButton = findViewById(R.id.playAgainBtn);
         mPlayAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +54,9 @@ public class ResultScreen extends AppCompatActivity {
                 startActivity(new Intent(ResultScreen.this, MainActivity.class));
             }
         });
+    }
 
+    public void setupResultData() {
         //Get the variables that were passed from GameScreen Activity
         //The two variables are two ArrayLists that containing the choice and points generated that round
         Bundle extras = getIntent().getExtras();
@@ -52,7 +64,9 @@ public class ResultScreen extends AppCompatActivity {
             roundChoices = extras.getStringArrayList("roundChoices");
             roundPoints = extras.getIntegerArrayList("roundPoints");
         }
+    }
 
+    public void fillResultTable() {
         // Fill table in activity_result.xml with choice and result for each round
         for (int i = 0; i < roundChoiceIDs.length; i++) {
             TextView choiceText = findViewById(roundChoiceIDs[i]);
@@ -60,7 +74,9 @@ public class ResultScreen extends AppCompatActivity {
             choiceText.setText(roundChoices.get(i));
             pointsText.setText("" + roundPoints.get(i));
         }
+    }
 
+    public void setTotalPoints() {
         totalPoints = findViewById(R.id.total_points);
 
         int sum = 0;
@@ -68,8 +84,6 @@ public class ResultScreen extends AppCompatActivity {
             sum += roundPoints.get(i);
         }
         totalPoints.setText("Total Points: " + sum);
-
-
     }
 
 }

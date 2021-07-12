@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         getSupportActionBar().setTitle("Welcome to Thirty!");
 
+        setupStartBtn();
+
+    }
+
+    public void setupStartBtn() {
         mStart_button = findViewById(R.id.start_button);
         mStart_button.setOnClickListener(new View.OnClickListener() {
             @Override
