@@ -182,9 +182,12 @@ public class GameScreen extends AppCompatActivity {
         choicesList = new ArrayList<>(Arrays.asList(choices));
 
         //Found solution of using ArrayAdapters to remove elements from Spinner, online at: https://android--code.blogspot.com/2015/08/android-spinner-remove-item.html
-        dropdownArrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_item, choicesList);
-        dropdownArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
-        dropdown.setAdapter(dropdownArrayAdapter);
+        //only create it if one already doesn't exist
+        if (dropdownArrayAdapter == null) {
+            dropdownArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, choicesList);
+            dropdownArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+            dropdown.setAdapter(dropdownArrayAdapter);
+        }
 
         mPointView = findViewById(R.id.pointView2);
 
@@ -202,6 +205,9 @@ public class GameScreen extends AppCompatActivity {
         saveInstanceState.putInt("throwCounter", throwCounter);
         saveInstanceState.putInt("roundCounter", roundCounter);
         saveInstanceState.putStringArrayList("choicesList", choicesList);
+        saveInstanceState.putInt("totalPoints", points);
+        saveInstanceState.putStringArrayList("roundChoices", roundChoices);
+        saveInstanceState.putIntegerArrayList("roundPoints", roundPoints);
         Log.d(TAG, "In onSaveInstanceState");
     }
 
@@ -214,6 +220,16 @@ public class GameScreen extends AppCompatActivity {
         throwCounter = savedInstanceState.getInt("throwCounter");
         roundCounter = savedInstanceState.getInt("roundCounter");
         choicesList = savedInstanceState.getStringArrayList("choicesList");
+        points = savedInstanceState.getInt("totalPoints");
+        roundChoices = savedInstanceState.getStringArrayList("roundChoices");
+        roundPoints = savedInstanceState.getIntegerArrayList("roundPoints");
+
+        //Update View
+        mPointView.setText(""+points);
+
+        dropdownArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, choicesList);
+        dropdownArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        dropdown.setAdapter(dropdownArrayAdapter);
 
         updateDice();
 
