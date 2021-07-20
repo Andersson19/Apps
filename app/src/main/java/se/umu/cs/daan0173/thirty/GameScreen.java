@@ -141,7 +141,8 @@ public class GameScreen extends AppCompatActivity {
                     Log.d(TAG, "throwing dice");
                 } else {
                     Log.d(TAG, "Showing Toast");
-                    Toast.makeText(getApplicationContext(), "Only 3 throws allowed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Only 3 throws allowed!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -352,7 +353,7 @@ public class GameScreen extends AppCompatActivity {
     public void calc_result() {
         String choice = (String) dropdown.getSelectedItem();
 
-        if (choice == "Low") {
+        if (choice.equals("Low")) {
             int sum = 0;
             for (int eyes : faces) {
                 if (eyes <= 3) {
@@ -369,6 +370,8 @@ public class GameScreen extends AppCompatActivity {
             dropdownArrayAdapter.notifyDataSetChanged();
         } else if (isNumeric(choice)) {
             calcByChoice(choice);
+        } else {
+            Log.d("GameScreen", "That choice is not valid");
         }
     }
 
