@@ -333,6 +333,20 @@ public class GameScreen extends AppCompatActivity {
         dropdownArrayAdapter.notifyDataSetChanged();
     }
 
+    //Checking if String is numeric or not, found at: https://www.baeldung.com/java-check-string-number
+    public boolean isNumeric(String choice) {
+        if (choice == null) {
+            return false;
+        }
+        try {
+            int i = Integer.parseInt(choice);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+
+        return true;
+    }
+
     //Calculates points for given choice
     //Uses Algorithm.java for all calculations except for "Low"
     public void calc_result() {
@@ -353,7 +367,7 @@ public class GameScreen extends AppCompatActivity {
             mPointView.setText("" + points);
             choicesList.remove("Low");
             dropdownArrayAdapter.notifyDataSetChanged();
-        } else {
+        } else if (isNumeric(choice)) {
             calcByChoice(choice);
         }
     }

@@ -301,27 +301,46 @@ public class Algorithm {
 
     //Calculate the result
     public void calc_result() {
-        int result = 0;
+        points = 0;
 
-        //check 1's
+        checkOne();
+        checkTwo();
+        checkThree();
+        checkFour();
+        checkFive();
+
+        //reset all results
+        Arrays.fill(res_of_1,0);
+        res_of_2.clear();
+        res_of_3.clear();
+        res_of_4.clear();
+        res_of_5.clear();
+        res_of_6.clear();
+
+    }
+
+    //checks for exact matches of target in arr[]
+    public void checkOne() {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == target) {
-                result += target;
+                points += target;
 
-                //remove this element from the array
+                //Remove the exact match for target
                 arr[i] = 0;
             }
         }
+    }
 
-        //check 2's
+    //checks for a pair of dice matching target in arr[]
+    public void checkTwo() {
         for (Tuple2<Integer,Integer> tpl : res_of_2) {
             int[] temp = new int[2];
             temp[0] = tpl.a;
             temp[1] = tpl.b;
             if (all_items_in_array(arr, temp)) {
-                result += target;
+                points += target;
 
-                //make sure we only remove 1 of the matching Integers
+                //Remove the two integers that match target
                 boolean a_removed = false;
                 boolean b_removed = false;
                 for (int i = 0; i < arr.length; i++) {
@@ -336,17 +355,19 @@ public class Algorithm {
                 }
             }
         }
+    }
 
-        //check 3's
+    //checks for a 3-pair match for target in arr[]
+    public void checkThree() {
         for (Tuple3<Integer,Integer,Integer> tpl : res_of_3) {
             int[] temp = new int[3];
             temp[0] = tpl.a;
             temp[1] = tpl.b;
             temp[2] = tpl.c;
             if (all_items_in_array(arr, temp)) {
-                result += target;
+                points += target;
 
-                //make sure we only remove 1 of the matching Integers
+                //Remove the three integers that match target
                 boolean a_removed = false;
                 boolean b_removed = false;
                 boolean c_removed = false;
@@ -365,43 +386,36 @@ public class Algorithm {
                 }
             }
         }
+    }
 
-        //check 4's
+    //checks for a 4-pair match in target
+    public void checkFour() {
+        boolean done = false;
         for (Tuple4<Integer,Integer,Integer,Integer> tpl : res_of_4) {
+            if (done) {
+                break;
+            }
+
             int[] temp = new int[4];
             temp[0] = tpl.a;
             temp[1] = tpl.b;
             temp[2] = tpl.c;
             temp[3] = tpl.d;
             if (all_items_in_array(arr, temp)) {
-                result += target;
-
-                //make sure we only remove 1 of the matching Integers
-                boolean a_removed = false;
-                boolean b_removed = false;
-                boolean c_removed = false;
-                boolean d_removed = false;
-                for (int i = 0; i < arr.length; i++) {
-
-                    if (arr[i] == temp[0] && !a_removed) {
-                        arr[i] = 0;
-                        a_removed = true;
-                    } else if (arr[i] == temp[1] && !b_removed) {
-                        arr[i] = 0;
-                        b_removed = true;
-                    } else if (arr[i] == temp[2] && !c_removed) {
-                        arr[i] = 0;
-                        c_removed = true;
-                    } else if (arr[i] == temp[3] && !d_removed) {
-                        arr[i] = 0;
-                        d_removed = true;
-                    }
-                }
+                points += target;
+                // no need to remove here since only a maximum of 2 dice will be left in array
+                done = true;
             }
         }
+    }
 
-        //check 5's
+    //checks for a 5-pair match in target
+    public void checkFive() {
+        boolean done = false;
         for (Tuple5<Integer,Integer,Integer,Integer,Integer> tpl : res_of_5) {
+            if (done) {
+                break;
+            }
             int[] temp = new int[5];
             temp[0] = tpl.a;
             temp[1] = tpl.b;
@@ -409,38 +423,20 @@ public class Algorithm {
             temp[3] = tpl.d;
             temp[4] = tpl.e;
             if (all_items_in_array(arr, temp)) {
-                result += target;
-
-                //make sure we only remove 1 of the matching Integers
-                boolean a_removed = false;
-                boolean b_removed = false;
-                boolean c_removed = false;
-                boolean d_removed = false;
-                boolean e_removed = false;
-                for (int i = 0; i < arr.length; i++) {
-
-                    if (arr[i] == temp[0] && !a_removed) {
-                        arr[i] = 0;
-                        a_removed = true;
-                    } else if (arr[i] == temp[1] && !b_removed) {
-                        arr[i] = 0;
-                        b_removed = true;
-                    } else if (arr[i] == temp[2] && !c_removed) {
-                        arr[i] = 0;
-                        c_removed = true;
-                    } else if (arr[i] == temp[3] && !d_removed) {
-                        arr[i] = 0;
-                        d_removed = true;
-                    } else if (arr[i] == temp[4] && !e_removed) {
-                        arr[i] = 0;
-                        e_removed = true;
-                    }
-                }
+                points += target;
+                // no need to remove here since only a maximum of 1 die will be left in array
+                done = true;
             }
         }
+    }
 
-        //check 6's
+    //checks for a 6-pair match in target
+    public void checkSix() {
+        boolean done = false;
         for (Tuple6<Integer,Integer,Integer,Integer,Integer,Integer> tpl : res_of_6) {
+            if (done) {
+                break;
+            }
             int[] temp = new int[6];
             temp[0] = tpl.a;
             temp[1] = tpl.b;
@@ -449,49 +445,11 @@ public class Algorithm {
             temp[4] = tpl.e;
             temp[5] = tpl.f;
             if (all_items_in_array(arr, temp)) {
-                result += target;
-
-                //make sure we only remove 1 of the matching Integers
-                boolean a_removed = false;
-                boolean b_removed = false;
-                boolean c_removed = false;
-                boolean d_removed = false;
-                boolean e_removed = false;
-                boolean f_removed = false;
-                for (int i = 0; i < arr.length; i++) {
-
-                    if (arr[i] == temp[0] && !a_removed) {
-                        arr[i] = 0;
-                        a_removed = true;
-                    } else if (arr[i] == temp[1] && !b_removed) {
-                        arr[i] = 0;
-                        b_removed = true;
-                    } else if (arr[i] == temp[2] && !c_removed) {
-                        arr[i] = 0;
-                        c_removed = true;
-                    } else if (arr[i] == temp[3] && !d_removed) {
-                        arr[i] = 0;
-                        d_removed = true;
-                    } else if (arr[i] == temp[4] && !e_removed) {
-                        arr[i] = 0;
-                        e_removed = true;
-                    } else if (arr[i] == temp[5] && !f_removed) {
-                        arr[i] = 0;
-                        f_removed = true;
-                    }
-                }
+                points += target;
+                //no need to remove here since no die's will be left in array
+                done = true;
             }
         }
-
-        //reset all results (Didn't quite understand why this created issues but it did.)
-        Arrays.fill(res_of_1,0);
-        res_of_2.clear();
-        res_of_3.clear();
-        res_of_4.clear();
-        res_of_5.clear();
-        res_of_6.clear();
-
-        this.points = result;
     }
 
     //main method used for debugging
