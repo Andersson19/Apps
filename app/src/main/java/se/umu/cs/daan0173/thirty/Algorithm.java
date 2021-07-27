@@ -237,40 +237,23 @@ public class Algorithm {
     //Find all combination of six dice matching target
     public static void search_6(int[] arr, int target) {
 
-        for (int i = 0; i < arr.length - 4; i++) {
-            int x = arr[i];
+        int x = arr[0];
+        int y = arr[1];
+        int z = arr[2];
+        int m = arr[3];
+        int f = arr[4];
+        int u = arr[5];
 
-            for (int p = i+1; p < arr.length - 3; p++) {
-                int y = arr[p];
+        if (x + y + z + m + f + u == target) {
+            Tuple6<Integer,Integer,Integer,Integer,Integer,Integer> tpl = new Tuple6<>();
+            tpl.a = x;
+            tpl.b = y;
+            tpl.c = z;
+            tpl.d = m;
+            tpl.e = f;
+            tpl.f = u;
 
-                for (int k = i+2; k < arr.length - 2; k++) {
-                    int z = arr[k];
-
-                    for (int l = i+3; l < arr.length - 1; l++) {
-                        int m = arr[l];
-
-                        for (int n = i+4; n < arr.length; n++) {
-                            int f = arr[n];
-
-                            for (int a = i+5; a < arr.length; a++) {
-                                int u = arr[a];
-
-                                if (x + y + z + m + f + u == target) {
-                                    Tuple6<Integer,Integer,Integer,Integer,Integer,Integer> tpl = new Tuple6<>();
-                                    tpl.a = x;
-                                    tpl.b = y;
-                                    tpl.c = z;
-                                    tpl.d = m;
-                                    tpl.e = f;
-                                    tpl.f = u;
-
-                                    res_of_6.add(tpl);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            res_of_6.add(tpl);
         }
     }
 
