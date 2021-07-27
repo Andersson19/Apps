@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Thirty</string>
+
+    <string name="dice1">dice1</string>
+    <string name="dice2">dice2</string>
+    <string name="dice3">dice3</string>
+    <string name="dice4">dice4</string>
+    <string name="dice5">dice5</string>
+    <string name="dice6">dice6</string>
+
+    <string name="welcomeText">Welcome to Thirty!</string>
+    <string name="calc_button">Calculate</string>
+    <string name="start_button">Start</string>
+    <string name="points">Points: </string>
+    <string name="pointView">0</string>
+    <string name="wellPlayed">Well Played!</string>
+    <string name="playAgain">Play Again</string>
+    <string name="totalPoints">Total Points: </string>
+    <string name="throwText">Throw</string>
+    <string name="keepText">Keep</string>
+
+    <string name="roundCol">Round</string>
+    <string name="pointsCol">Points</string>
+    <string name="choiceCol">Choice</string>
+
+    <string name="round1">1</string>
+    <string name="round2">2</string>
+    <string name="round3">3</string>
+    <string name="round4">4</string>
+    <string name="round5">5</string>
+    <string name="round6">6</string>
+    <string name="round7">7</string>
+    <string name="round8">8</string>
+    <string name="round9">9</string>
+    <string name="round10">10</string>
+
+    <string name="round1points">0</string>
+    <string name="round2points">0</string>
+    <string name="round3points">0</string>
+    <string name="round4points">0</string>
+    <string name="round5points">0</string>
+    <string name="round6points">0</string>
+    <string name="round7points">0</string>
+    <string name="round8points">0</string>
+    <string name="round9points">0</string>
+    <string name="round10points">0</string>
+
+
+    <string name="choice1"></string>
+    <string name="choice2"></string>
+    <string name="choice3"></string>
+    <string name="choice4"></string>
+    <string name="choice5"></string>
+    <string name="choice6"></string>
+    <string name="choice7"></string>
+    <string name="choice8"></string>
+    <string name="choice9"></string>
+    <string name="choice10"></string>
+
+    <string-array name="entries_array">
+        <item>Low</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+</resources>
