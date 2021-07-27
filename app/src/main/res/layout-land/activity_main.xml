@@ -111,7 +111,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:text="@string/points"
-        android:textSize="48sp"
+        android:textSize="40sp"
         app:layout_constraintStart_toEndOf="@+id/dice3"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,7 +122,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:text="@string/pointView"
-        android:textSize="48sp"
+        android:textSize="40sp"
         app:layout_constraintStart_toEndOf="@+id/pointView"
         app:layout_constraintTop_toTopOf="parent" />
 

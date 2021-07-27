@@ -403,7 +403,28 @@ public class Algorithm {
             temp[3] = tpl.d;
             if (all_items_in_array(arr, temp)) {
                 points += target;
-                // no need to remove here since only a maximum of 2 dice will be left in array
+
+                //Remove the three integers that match target
+                boolean a_removed = false;
+                boolean b_removed = false;
+                boolean c_removed = false;
+                boolean d_removed = false;
+                for (int i = 0; i < arr.length; i++) {
+
+                    if (arr[i] == temp[0] && !a_removed) {
+                        arr[i] = 0;
+                        a_removed = true;
+                    } else if (arr[i] == temp[1] && !b_removed) {
+                        arr[i] = 0;
+                        b_removed = true;
+                    } else if (arr[i] == temp[2] && !c_removed) {
+                        arr[i] = 0;
+                        c_removed = true;
+                    } else if (arr[i] == temp[2] && !d_removed) {
+                        arr[i] = 0;
+                        d_removed = true;
+                    }
+                }
                 done = true;
             }
         }
@@ -424,7 +445,9 @@ public class Algorithm {
             temp[4] = tpl.e;
             if (all_items_in_array(arr, temp)) {
                 points += target;
-                // no need to remove here since only a maximum of 1 die will be left in array
+
+                // no need to remove here
+
                 done = true;
             }
         }
@@ -446,7 +469,9 @@ public class Algorithm {
             temp[5] = tpl.f;
             if (all_items_in_array(arr, temp)) {
                 points += target;
-                //no need to remove here since no die's will be left in array
+
+                //no need to remove here
+
                 done = true;
             }
         }
